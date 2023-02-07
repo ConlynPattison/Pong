@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 public class ScoreZone : MonoBehaviour
 {
     public GameObject ballSpawner;
+    public GameObject parent;
     public TextMeshProUGUI scoreTM;
-    public TextMeshProUGUI winTM;
     
     private int _playerScore;
     private const int GoalScore = 11;
@@ -18,11 +18,7 @@ public class ScoreZone : MonoBehaviour
 
     private void Start()
     {
-        _playerScore = 0;
-        _serveRight = Random.Range(0, 2) == 1;
-        
-        UpdateScoreText();
-        winTM.gameObject.SetActive(false);
+        Restart();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +28,11 @@ public class ScoreZone : MonoBehaviour
         
         PlayerScored();
         Destroy(other.gameObject);
+    }
+
+    public static void InitServeDirection()
+    {
+        _serveRight = Random.Range(0, 2) == 1;
     }
 
     public static bool WillServeRight()
@@ -53,8 +54,9 @@ public class ScoreZone : MonoBehaviour
         }
         else
         {
-            winTM.text = $"{tag} Wins!";
-            winTM.gameObject.SetActive(true);
+            Debug.Log($"{playerTag} has WON!! Restarting the game...");
+            parent.GetComponent<WinCondition>().PlayerWon();
+            ballSpawner.GetComponent<BallSpawnerController>().NextRound();
         }
         
 
@@ -67,6 +69,7 @@ public class ScoreZone : MonoBehaviour
     public void Restart()
     {
         _playerScore = 0;
+        InitServeDirection();
         UpdateScoreText();
     }
 }
