@@ -18,7 +18,7 @@ public class PongBall : MonoBehaviour
             ? _rigidbody.velocity = Vector3.right * startingSpeed
             : _rigidbody.velocity = Vector3.left * startingSpeed;
         
-        Debug.Log($"Current x Velocity = {_rigidbody.velocity.x}");
+        //Debug.Log($"Current x Velocity = {_rigidbody.velocity.x}");
     }
 
     // Update is called once per frame

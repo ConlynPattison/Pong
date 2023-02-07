@@ -17,7 +17,7 @@ public class PongBorder : MonoBehaviour
         
         audioSource.Play();
         
-        Debug.Log($"Hit Border, Current total Velocity = {velocity.magnitude}");
+        //Debug.Log($"Hit Border, Current total Velocity = {velocity.magnitude}");
     }
 
     private void OnCollisionStay(Collision collisionInfo)

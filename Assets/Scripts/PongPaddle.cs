@@ -40,7 +40,7 @@ public class PongPaddle : MonoBehaviour
         Bounds bounds = GetComponent<BoxCollider>().bounds;
         Rigidbody ballRigidBody = collision.gameObject.GetComponent<Rigidbody>();
         Vector3 ballVelocity = collision.gameObject.GetComponent<PongBall>().VelocityBeforeCollision();
-        Debug.Log($"Hit Paddle, Current total Velocity = {ballVelocity.magnitude}");
+        //Debug.Log($"Hit Paddle, Current total Velocity = {ballVelocity.magnitude}");
         
         float magnitude = ballVelocity.magnitude * (1f + _timesHit/100f);
         float collisionTransformY = collision.transform.position.y;
