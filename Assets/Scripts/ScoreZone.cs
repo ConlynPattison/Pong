@@ -19,7 +19,7 @@ public class ScoreZone : MonoBehaviour
 
     private void Start()
     {
-        Restart();
+        Reset();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,7 +66,7 @@ public class ScoreZone : MonoBehaviour
         scoreTM.text = $"{_playerScore}";
     }
 
-    public void Restart()
+    public void Reset()
     {
         _playerScore = 0;
         InitServeDirection();

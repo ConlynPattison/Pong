@@ -10,7 +10,7 @@ public class WinCondition : MonoBehaviour
     
     public void PlayerWon()
     {
-        p1ScoreZone.GetComponent<ScoreZone>().Restart();
-        p2ScoreZone.GetComponent<ScoreZone>().Restart();
+        p1ScoreZone.GetComponent<ScoreZone>().Reset();
+        p2ScoreZone.GetComponent<ScoreZone>().Reset();
     }
 }
