@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ScoreZone : MonoBehaviour
 {
     public GameObject ballSpawner;
-    public GameObject parent;
+    public GameObject gameManager;
     public TextMeshProUGUI scoreTM;
     
     private int _playerScore;
@@ -30,7 +31,7 @@ public class ScoreZone : MonoBehaviour
         Destroy(other.gameObject);
     }
 
-    public static void InitServeDirection()
+    private static void InitServeDirection()
     {
         _serveRight = Random.Range(0, 2) == 1;
     }
@@ -55,12 +56,11 @@ public class ScoreZone : MonoBehaviour
         else
         {
             Debug.Log($"{playerTag} has WON!! Restarting the game...");
-            parent.GetComponent<WinCondition>().PlayerWon();
+            gameManager.GetComponent<WinCondition>().PlayerWon();
             ballSpawner.GetComponent<BallSpawnerController>().NextRound();
         }
-        
-
     }
+    
     private void UpdateScoreText()
     {
         scoreTM.text = $"{_playerScore}";

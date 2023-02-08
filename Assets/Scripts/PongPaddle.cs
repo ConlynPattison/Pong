@@ -43,12 +43,7 @@ public class PongPaddle : MonoBehaviour
         //Debug.Log($"Hit Paddle, Current total Velocity = {ballVelocity.magnitude}");
         
         float magnitude = ballVelocity.magnitude * (1f + _timesHit/100f);
-        float collisionTransformY = collision.transform.position.y;
-        
-        if (collisionTransformY > bounds.max.y)
-            collisionTransformY = bounds.max.y;
-        else if (collisionTransformY < bounds.min.y)
-            collisionTransformY = bounds.min.y;
+        float collisionTransformY = Mathf.Clamp(collision.transform.position.y, bounds.min.y, bounds.max.y);
         
         float rotationScaleY = (2f * (collisionTransformY - bounds.min.y) / _lengthY) - 1f;
         
