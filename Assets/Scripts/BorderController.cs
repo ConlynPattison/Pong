@@ -42,9 +42,6 @@ public class PongBorder : MonoBehaviour
     
     private void PlayBallSound()
     {
-        _source.clip = ballSound;
-        _source.pitch = (0.85f + PaddleController.GetTimesHit() / 100f);
-        _source.Play();
-        Debug.Log(_source.pitch);
+        _source.PlayOneShot(ballSound);
     }
 }

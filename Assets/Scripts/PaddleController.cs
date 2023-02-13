@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class PaddleController : MonoBehaviour
@@ -79,16 +81,10 @@ public class PaddleController : MonoBehaviour
 
     private void PlayBallSound()
     {
-        _source.clip = ballSound;
-        _source.pitch = (0.85f + _timesHit / 100f);
-        _source.Play();
-        Debug.Log(_source.pitch);
+        _source.outputAudioMixerGroup.audioMixer.SetFloat("BouncePitch", (0.85f + _timesHit / 100f));
+        _source.PlayOneShot(ballSound);
     }
 
-    public static int GetTimesHit()
-    {
-        return _timesHit;
-    }
     public static void ResetTimesHit()
     {
         _timesHit = 0;
