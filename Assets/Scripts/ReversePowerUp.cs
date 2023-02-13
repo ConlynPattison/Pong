@@ -11,7 +11,7 @@ public class ReversePowerUp : MonoBehaviour
             return;
         
         Vector3 ballVelocity = other.GetComponent<Rigidbody>().velocity;
-        other.GetComponent<Rigidbody>().velocity = new Vector3(-ballVelocity.x, ballVelocity.y, ballVelocity.z);
+        other.GetComponent<Rigidbody>().velocity = new Vector3(ballVelocity.x, -ballVelocity.y, 0f);
         
         Relocate();
     }

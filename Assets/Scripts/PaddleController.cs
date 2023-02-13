@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PongPaddle : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PongPaddle : MonoBehaviour
     private Rigidbody _rigidbody;
     private string _playerVerticalAxis;
     private float _lengthY;
+    private bool _isShrunken;
 
     private static int _timesHit;
     private const float MaxAngle = 60f;
@@ -55,6 +57,23 @@ public class PongPaddle : MonoBehaviour
         _timesHit++;
         audioSource.pitch = (0.85f + _timesHit / 100f);
         audioSource.Play();
+        if (_isShrunken)
+            Grow();
+    }
+
+    private void Grow()
+    {
+        Debug.Log("growing");
+        _isShrunken = false;
+        transform.localScale = new Vector3(1f, 5f, 1f);
+    }
+
+    public void Shrink()
+    {
+        Debug.Log("shrinking");
+        _isShrunken = true;
+        transform.localScale = new Vector3(1f, 2.5f, 1f);
+
     }
 
     public static void ResetTimesHit()
