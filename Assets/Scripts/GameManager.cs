@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SetUIState(false);
+        SetUIState(true, false);
     }
 
     public void PlayerWon(string winningTag)
@@ -43,5 +43,11 @@ public class GameManager : MonoBehaviour
     {
         startButton.gameObject.SetActive(shouldShow);
         winText.gameObject.SetActive(shouldShow);
+    }
+    
+    private void SetUIState(bool shouldShowButton, bool shouldShowText)
+    {
+        startButton.gameObject.SetActive(shouldShowButton);
+        winText.gameObject.SetActive(shouldShowText);
     }
 }
