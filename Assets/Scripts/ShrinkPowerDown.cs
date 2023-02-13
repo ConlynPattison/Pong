@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ShrinkPowerDown : MonoBehaviour
 {
     public GameObject player1Paddle;
     public GameObject player2Paddle;
+
+    private void Start()
+    {
+        Reposition();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,6 +34,7 @@ public class ShrinkPowerDown : MonoBehaviour
 
     private void Reposition()
     {
-        return;
+        gameObject.SetActive(true);
+        transform.position = new Vector3(Random.Range(-5f, 5f), Random.Range(-7f, 7f), 0f);
     }
 }
