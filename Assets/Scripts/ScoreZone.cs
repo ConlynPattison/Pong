@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ScoreZone : MonoBehaviour
@@ -12,14 +11,24 @@ public class ScoreZone : MonoBehaviour
     public GameObject ballSpawner;
     public GameObject gameManager;
     public TextMeshProUGUI scoreTM;
-    
+    public AudioClip scoreClip;
+
+    private AudioSource _source;
     private int _playerScore;
     private const int GoalScore = 11;
     private static bool _serveRight;
 
     private void Start()
     {
+        _source = GetComponent<AudioSource>();
         Reset();
+    }
+    
+    public void Reset()
+    {
+        _playerScore = 0;
+        InitServeDirection();
+        UpdateScoreText();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,18 +36,9 @@ public class ScoreZone : MonoBehaviour
         if (!other.gameObject.CompareTag("Ball"))
             return;
         
+        _source.PlayOneShot(scoreClip);
         PlayerScored();
         Destroy(other.gameObject);
-    }
-
-    private static void InitServeDirection()
-    {
-        _serveRight = Random.Range(0, 2) == 1;
-    }
-
-    public static bool WillServeRight()
-    {
-        return _serveRight;
     }
 
     private void PlayerScored()
@@ -46,15 +46,17 @@ public class ScoreZone : MonoBehaviour
         String playerTag = tag;
         Debug.Log($"{playerTag} scores, {playerTag} has {++_playerScore} points");
         UpdateScoreText();
-        
+
         if (_playerScore != GoalScore)
+        {
             _serveRight = CompareTag("Player1");
+            ballSpawner.GetComponent<BallSpawnerController>().NextServe();
+        }
         else
         {
             Debug.Log($"{playerTag} has WON!! Restarting the game...");
-            gameManager.GetComponent<WinCondition>().PlayerWon();
+            gameManager.GetComponent<GameManager>().PlayerWon(tag);
         }
-        ballSpawner.GetComponent<BallSpawnerController>().NextRound();
         PaddleController.ResetTimesHit();
     }
     
@@ -62,11 +64,14 @@ public class ScoreZone : MonoBehaviour
     {
         scoreTM.text = $"{_playerScore}";
     }
-
-    public void Reset()
+    
+    public static bool WillServeRight()
     {
-        _playerScore = 0;
-        InitServeDirection();
-        UpdateScoreText();
+        return _serveRight;
+    }
+    
+    private static void InitServeDirection()
+    {
+        _serveRight = Random.Range(0, 2) == 1;
     }
 }

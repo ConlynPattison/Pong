@@ -6,8 +6,12 @@ using Random = UnityEngine.Random;
 
 public class ReversePowerUp : MonoBehaviour
 {
+    public AudioClip reverseClip;
+
+    private AudioSource _source;
     private void Start()
     {
+        _source = GetComponent<AudioSource>();
         Reposition();
     }
 
@@ -18,6 +22,8 @@ public class ReversePowerUp : MonoBehaviour
         
         Vector3 ballVelocity = other.GetComponent<Rigidbody>().velocity;
         other.GetComponent<Rigidbody>().velocity = new Vector3(ballVelocity.x, -ballVelocity.y, 0f);
+        
+        _source.PlayOneShot(reverseClip);
         
         Reposition();
     }

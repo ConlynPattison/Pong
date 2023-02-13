@@ -8,10 +8,10 @@ public class BallSpawnerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NextRound();
+        NextServe();
     }
 
-    public void NextRound()
+    public void NextServe()
     {
         Instantiate(ballPrefab, transform.position, Quaternion.identity);
     }

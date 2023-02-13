@@ -35,7 +35,7 @@ public class PongBorder : MonoBehaviour
         if (collisionInfo.gameObject.GetComponent<Rigidbody>().velocity.y == 0f)
         {
             Destroy(collisionInfo.gameObject);
-            ballSpawner.GetComponent<BallSpawnerController>().NextRound();
+            ballSpawner.GetComponent<BallSpawnerController>().NextServe();
             PaddleController.ResetTimesHit();
         }
     }

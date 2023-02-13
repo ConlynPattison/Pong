@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitsPerSecond: 0
-  audioSource: {fileID: 0}
+  ballSound: {fileID: 0}
+  shrinkSound: {fileID: 0}
 --- !u!82 &3881789775348826386
 AudioSource:
   m_ObjectHideFlags: 0
@@ -132,7 +133,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -144,7 +145,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -161,13 +162,13 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 0.5665436
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.01457203
+      outSlope: -0.01457203
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.17353117
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -177,7 +178,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
