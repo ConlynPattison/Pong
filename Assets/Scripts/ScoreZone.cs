@@ -48,17 +48,14 @@ public class ScoreZone : MonoBehaviour
         UpdateScoreText();
         
         if (_playerScore != GoalScore)
-        {
-            PongPaddle.ResetTimesHit();
             _serveRight = CompareTag("Player1");
-            ballSpawner.GetComponent<BallSpawnerController>().NextRound();
-        }
         else
         {
             Debug.Log($"{playerTag} has WON!! Restarting the game...");
             gameManager.GetComponent<WinCondition>().PlayerWon();
-            ballSpawner.GetComponent<BallSpawnerController>().NextRound();
         }
+        ballSpawner.GetComponent<BallSpawnerController>().NextRound();
+        PongPaddle.ResetTimesHit();
     }
     
     private void UpdateScoreText()

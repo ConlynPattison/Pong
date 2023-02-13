@@ -28,6 +28,7 @@ public class PongBorder : MonoBehaviour
         {
             Destroy(collisionInfo.gameObject);
             ballSpawner.GetComponent<BallSpawnerController>().NextRound();
+            PongPaddle.ResetTimesHit();
         }
     }
 }
