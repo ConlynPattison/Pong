@@ -6,15 +6,17 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PongPaddle : MonoBehaviour
+public class PaddleController : MonoBehaviour
 {
     public float unitsPerSecond;
-    public AudioSource audioSource;
+    public AudioClip ballSound;
+    public AudioClip shrinkSound;
 
     private Rigidbody _rigidbody;
     private string _playerVerticalAxis;
     private float _lengthY;
     private bool _isShrunken;
+    private AudioSource _source;
 
     private static int _timesHit;
     private const float MaxAngle = 60f;
@@ -25,6 +27,7 @@ public class PongPaddle : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _playerVerticalAxis = CompareTag("Player1") ? "P1Vertical" : "P2Vertical";
         _lengthY = GetComponent<BoxCollider>().bounds.size.y;
+        _source = GetComponent<AudioSource>();
         ResetTimesHit();
     }
 
@@ -55,8 +58,7 @@ public class PongPaddle : MonoBehaviour
             ballRigidBody.velocity = Quaternion.Euler(0f, 0f, rotationScaleY * MaxAngle) * Vector3.right * magnitude;
         
         _timesHit++;
-        audioSource.pitch = (0.85f + _timesHit / 100f);
-        audioSource.Play();
+        PlayBallSound();
         if (_isShrunken)
             Grow();
     }
@@ -73,9 +75,20 @@ public class PongPaddle : MonoBehaviour
         Debug.Log("shrinking");
         _isShrunken = true;
         transform.localScale = new Vector3(1f, 2.5f, 1f);
-
     }
 
+    private void PlayBallSound()
+    {
+        _source.clip = ballSound;
+        _source.pitch = (0.85f + _timesHit / 100f);
+        _source.Play();
+        Debug.Log(_source.pitch);
+    }
+
+    public static int GetTimesHit()
+    {
+        return _timesHit;
+    }
     public static void ResetTimesHit()
     {
         _timesHit = 0;

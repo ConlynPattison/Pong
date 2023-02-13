@@ -55,7 +55,7 @@ public class ScoreZone : MonoBehaviour
             gameManager.GetComponent<WinCondition>().PlayerWon();
         }
         ballSpawner.GetComponent<BallSpawnerController>().NextRound();
-        PongPaddle.ResetTimesHit();
+        PaddleController.ResetTimesHit();
     }
     
     private void UpdateScoreText()

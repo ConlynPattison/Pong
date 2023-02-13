@@ -22,11 +22,11 @@ public class ShrinkPowerDown : MonoBehaviour
         
         if (other.gameObject.GetComponent<PongBall>().VelocityBeforeCollision().x < 0f)
         {
-            player1Paddle.gameObject.GetComponent<PongPaddle>().Shrink();
+            player1Paddle.gameObject.GetComponent<PaddleController>().Shrink();
         }
         else
         {
-            player2Paddle.gameObject.GetComponent<PongPaddle>().Shrink();
+            player2Paddle.gameObject.GetComponent<PaddleController>().Shrink();
         }
         
         Reposition();
