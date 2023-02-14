@@ -45,6 +45,7 @@ public class ScoreZone : MonoBehaviour
     {
         // String playerTag = tag;
         // Debug.Log($"{playerTag} scores, {playerTag} has {++_playerScore} points");
+        ++_playerScore;
         UpdateScoreText();
 
         if (_playerScore != GoalScore)
