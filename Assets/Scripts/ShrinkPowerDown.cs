@@ -7,14 +7,11 @@ using Random = UnityEngine.Random;
 
 public class ShrinkPowerDown : MonoBehaviour
 {
-    public AudioClip shrinkClip;
     public GameObject player1Paddle;
     public GameObject player2Paddle;
 
-    private AudioSource _source;
     private void Start()
     {
-        _source = GetComponent<AudioSource>();
         Reposition();
     }
 
@@ -31,8 +28,6 @@ public class ShrinkPowerDown : MonoBehaviour
         {
             player2Paddle.gameObject.GetComponent<PaddleController>().Shrink();
         }
-        
-        _source.PlayOneShot(shrinkClip);
         
         Reposition();
     }

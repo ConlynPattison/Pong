@@ -28,7 +28,7 @@ public class ScoreZone : MonoBehaviour
     {
         _playerScore = 0;
         InitServeDirection();
-        UpdateScoreText();
+        scoreTM.text = $"{_playerScore}";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,8 +43,8 @@ public class ScoreZone : MonoBehaviour
 
     private void PlayerScored()
     {
-        String playerTag = tag;
-        Debug.Log($"{playerTag} scores, {playerTag} has {++_playerScore} points");
+        // String playerTag = tag;
+        // Debug.Log($"{playerTag} scores, {playerTag} has {++_playerScore} points");
         UpdateScoreText();
 
         if (_playerScore != GoalScore)
@@ -54,7 +54,7 @@ public class ScoreZone : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{playerTag} has WON!! Restarting the game...");
+            // Debug.Log($"{playerTag} has WON!! Restarting the game...");
             gameManager.GetComponent<GameManager>().PlayerWon(tag);
         }
         PaddleController.ResetTimesHit();
@@ -63,8 +63,9 @@ public class ScoreZone : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreTM.text = $"{_playerScore}";
+        LeanTween.rotate(scoreTM.rectTransform, 360f, 0.3f);
     }
-    
+
     public static bool WillServeRight()
     {
         return _serveRight;

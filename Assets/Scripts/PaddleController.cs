@@ -16,7 +16,6 @@ public class PaddleController : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private string _playerVerticalAxis;
-    private float _lengthY;
     private bool _isShrunken;
     private AudioSource _source;
 
@@ -28,7 +27,6 @@ public class PaddleController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _playerVerticalAxis = CompareTag("Player1") ? "P1Vertical" : "P2Vertical";
-        _lengthY = GetComponent<BoxCollider>().bounds.size.y;
         _source = GetComponent<AudioSource>();
         ResetTimesHit();
     }
@@ -52,7 +50,7 @@ public class PaddleController : MonoBehaviour
         float magnitude = ballVelocity.magnitude * (1f + _timesHit/100f);
         float collisionTransformY = Mathf.Clamp(collision.transform.position.y, bounds.min.y, bounds.max.y);
         
-        float rotationScaleY = (2f * (collisionTransformY - bounds.min.y) / _lengthY) - 1f;
+        float rotationScaleY = (2f * (collisionTransformY - bounds.min.y) / bounds.size.y) - 1f;
         
         if (ballVelocity.x > 0f)
             ballRigidBody.velocity = Quaternion.Euler(0f, 0f, rotationScaleY * -MaxAngle) * Vector3.left * magnitude;
@@ -67,14 +65,15 @@ public class PaddleController : MonoBehaviour
 
     private void Grow()
     {
-        Debug.Log("growing");
+        // Debug.Log("growing");
         _isShrunken = false;
         transform.localScale = new Vector3(1f, 5f, 1f);
     }
 
     public void Shrink()
     {
-        Debug.Log("shrinking");
+        // Debug.Log("shrinking");
+        _source.PlayOneShot(shrinkSound);
         _isShrunken = true;
         transform.localScale = new Vector3(1f, 2.5f, 1f);
     }
